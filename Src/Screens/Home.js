@@ -75,10 +75,11 @@ const Home = () => {
         colors.background_theme5,
       ]}
       style={{flex: 1}}>
+      <MyStatusBar backgroundColor={colors.background_theme2} />
       <ScrollView style={{flex: 1}}>
         <MyStatusBar style={{flex: 1}} />
         {Header()}
-        {Search()}
+
         {banner()}
         {Englishsongs()}
         {ListOfSongs()}
@@ -96,12 +97,36 @@ const Home = () => {
   );
   function Header() {
     return (
-      <View style={{paddingVertical: SCREEN_HEIGHT * 0.01}}>
-        <AntDesign
-          name="left"
-          color={colors.background_theme1}
-          size={SCREEN_HEIGHT * 0.035}
-        />
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: SCREEN_WIDTH * 0.04,
+          paddingHorizontal: SCREEN_WIDTH * 0.03,
+          paddingTop: SCREEN_HEIGHT * 0.03,
+        }}>
+        <View
+          style={{
+            elevation: 1,
+            height: SCREEN_HEIGHT * 0.05,
+            width: SCREEN_WIDTH * 0.1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 100,
+            backgroundColor: '#1DB954',
+          }}>
+          <Text style={{color: 'black', fontWeight: '500'}}>A</Text>
+        </View>
+        <View>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: '500',
+              color: colors.white_color,
+            }}>
+            Welcome Anuj
+          </Text>
+        </View>
       </View>
     );
   }
@@ -330,12 +355,12 @@ const Home = () => {
     return (
       <TouchableOpacity
         onPress={() => {
-          SetIsvisble(true); // Show the modal when player is pressed
+          SetIsvisble(true);
         }}
         style={{
           width: SCREEN_WIDTH,
           height: SCREEN_HEIGHT * 0.1,
-          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          backgroundColor: colors.background_theme2,
           position: 'absolute',
           bottom: 0,
           flexDirection: 'row',
@@ -349,15 +374,20 @@ const Home = () => {
             style={{
               height: SCREEN_HEIGHT * 0.08,
               width: SCREEN_WIDTH * 0.16,
+              borderRadius: 5,
             }}
             source={{uri: songsList[CurrentIndex].artwork}}
           />
-          <View
-            style={{gap: 4, paddingTop: SCREEN_HEIGHT * 0.01, borderWidth: 1}}>
-            <Text style={{color: colors.white_color, fontSize: 13}}>
+          <View style={{gap: 4, paddingTop: SCREEN_HEIGHT * 0.01}}>
+            <Text
+              style={{
+                color: colors.white_color,
+                fontSize: 15,
+                fontWeight: '500',
+              }}>
               {songsList[CurrentIndex]?.title}
             </Text>
-            <Text style={{color: colors.white_color, fontSize: 10}}>
+            <Text style={{color: colors.white_color, fontSize: 12}}>
               {songsList[CurrentIndex]?.artist}
             </Text>
           </View>
@@ -381,6 +411,7 @@ const Home = () => {
           Progress={Progress}
           isVisble={isVisble}
           CurrentIndex={CurrentIndex}
+          setIsPlaying={setIsPlaying}
           onClose={() => {
             SetIsvisble(false);
           }}
